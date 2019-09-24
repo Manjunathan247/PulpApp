@@ -46,7 +46,6 @@ Feature: Book System Management
         Then the Book should be added to the list
 
     Scenario: Click on Series on the navigation bar
-        Given The Pulp app main menu is open
         When I click on Series navigation link
         Then It should display with list of created series
         And I click on created series link

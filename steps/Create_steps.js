@@ -17,10 +17,7 @@ var sample = function () {
     defineSupportCode(function ({ Given, When, Then }) {
 
         Given('The Pulp app main menu is open', async function () {
-            browser.ignoreSynchronization = true;
-            await browser.waitForAngularEnabled(false);
-            await browser.driver.manage().window().maximize();
-            await browser.get("https://thepulper.herokuapp.com/apps/pulp/");
+           
             var title = await browser.getTitle();
             console.log("Title of the page is " + title);
             await expect(title).to.equal("Pulp App Main Menu");
@@ -206,16 +203,13 @@ var sample = function () {
         });
 
         Then('It should display with list of created series', async function () {
-            //var seriesLists=await listofSeriesPage.listOfSeries();
-            // element.all(by.xpath("/html/body/ul/li")).each(function (listOf_Series) {
-            //     console.log("List of series are " + listOf_Series);
-
-            // element.all(by.xpath("/html/body/ul/li")).each(function(element) {
-            //     // Will print 0 First, 1 Second, 2 Third.
-            //     element.getText().then(function (listOf_Series) {
-            //       console.log(listOf_Series);
-            //     });
-            //   });
+            var a = element(by.xpath("/html/body/ul/li/a"));
+            element.all(by.xpath("/html/body/ul/li")).each(function(a) {
+                // Will print 0 First, 1 Second, 2 Third.
+               a[1].getText().then(function (listOf_Series) {
+                  console.log("List of the series are "+ listOf_Series);
+                });
+              });
         });
 
         Then('I click on created series link', function () {

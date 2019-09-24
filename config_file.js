@@ -11,5 +11,12 @@ exports.config =
         cucumberOpts: {
             require: 'steps/*_steps.js',
             
+        },
+
+        onPrepare : async function(){
+            browser.ignoreSynchronization = true;
+            //await browser.waitForAngularEnabled(false);
+            browser.driver.manage().window().maximize();
+            await browser.get("https://thepulper.herokuapp.com/apps/pulp/");
         }
     }
