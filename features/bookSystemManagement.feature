@@ -6,10 +6,10 @@ Feature: Book System Management
     Scenario: Click on Create on the navigation bar
         Given The Pulp app main menu is open
         When I mouse hover on Create link in navigation bar
-        #Then It should display Author,Series,Publisher and Book under Create link
+        Then It should display Author,Series,Publisher and Book under Create link
 
     Scenario: Click on Author link under Create
-        #Given The Author link should display under Create
+        Given The Author link should display under Create
         When I click on Author link
         Then It should navigate to Create Author page
         And I enter name of the author

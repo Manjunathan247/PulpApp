@@ -1,16 +1,18 @@
 var CreateSeries = function()
 {
-    this.nameOfSeries = function (seriesName) {
-        element(by.id('seriesname')).sendkeys(seriesName);  
+    this.seriesName = element(by.id('seriesname')); 
+
+    this.nameOfSeries = function (series_Name) {
+         return this.seriesName.sendKeys(series_Name);
     };
 
     this.createButton = function () {
-        element(by.id('create'));  
+        return element(by.id('create'));  
     };
 
     this.addedSeriesList = function () {
-        element(by.xpath("//h2[starts-with(text(),'Added Series')]"));  
+        return element(by.xpath("//h2[starts-with(text(),'Added Series')]"));  
     };
 };
 
-module.exports = CreateSeries;
+module.exports = new CreateSeries();

@@ -2,29 +2,31 @@ var PulpAppMainPage = function () {
 
     this.createNavBar = function () {
         //element(by.xpath("//nav[@id='primary_nav_wrap']/ul/li[8]/a"));
-        element(by.linkText('Create'));
+        return element(by.linkText('Create'));
     };
 
     this.seriesNavBar = function () {
         //element(by.xpath("//nav[@id='primary_nav_wrap']/ul/li[8]/a"));
-        element(by.linkText('Series'));
+        //return element(by.linkText('Series'));
+        return element(by.xpath("//*[@id='primary_nav_wrap']/ul/li[5]/a"));
     };
 
     this.author = function () {
-        element(by.linkText('Author'));
+       return element(by.linkText('Author'));
     };
 
     this.series = function () {
-        element(by.linkText('Series'));
+        //return element(by.linkText('Series'));
+        return element(by.xpath("//*[@id='primary_nav_wrap']/ul/li[8]/ul/li[2]"));
     };
 
     this.publisher = function () {
-        element(by.linkText('Publisher'));
+        return element(by.linkText('Publisher'));
     };
 
     this.book = function () {
-        element(by.linkText('Book'));
+        return element(by.linkText('Book'));
     };
 }
 
-module.exports = PulpAppMainPage;
+module.exports =new PulpAppMainPage();

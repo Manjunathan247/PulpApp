@@ -1,16 +1,18 @@
 var CreatePublisher = function()
 {
-    this.nameOfPublisher = function (publisherName) {
-        element(by.id('publishername')).sendkeys(publisherName);  
+    this.publishName =  element(by.id('publishername'));
+
+    this.enterPublisherName = function (publisher_Name) {
+        return this.publishName.sendKeys(publisher_Name);
     };
 
     this.createButton = function () {
-        element(by.id('create'));  
+        return element(by.id('create'));  
     };
 
     this.addedPublisherList = function () {
-        element(by.xpath("//h2[starts-with(text(),'Added Publisher')]"));  
+        return element(by.xpath("//h2[starts-with(text(),'Added Publisher')]"));  
     };
 }
 
-module.exports = CreatePublisher;
+module.exports = new CreatePublisher();
