@@ -1,22 +1,18 @@
 var ListOfSeriesPage = function () {
+    this.selectList = element.all(by.xpath("(/html/body/ul/li[1]/a)[1]"));
+    this.list = element.all(by.xpath("/html/body/ul/li"));
+    this.listOfBooks = element(by.linkText("List of Books in Series"));
 
     this.createNavBar = function () {
-        //element(by.xpath("//nav[@id='primary_nav_wrap']/ul/li[8]/a"));
         element(by.linkText('Create'));
     };
 
-    this.listOfSeries = function () {
-       return element.all(by.xpath("/html/body/ul/li")).getText().then(function (listOf_Series) {
-            console.log("List of series are " + listOf_Series);
-        })
+    this.listOfSeries = async function (seriesNameList) {
+        for (let j = 0; j < await seriesNameList.length; j++) {
+            var seriesName = await seriesNameList[j].getText();
+            await console.log(seriesName);
+        }
     }
-
-    element.all(by.css('ul.sbsb_b')).each(function(element, index) {
-        element.getText().then(function(text) {
-            console.log(text);
-        });
-    });
-
 }
 
 module.exports = new ListOfSeriesPage();

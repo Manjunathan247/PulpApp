@@ -52,3 +52,7 @@ Feature: Book System Management
         Then It should display selected series details page
         And I click on List of Books in Series
         Then It should display the table of books in the series
+
+    Scenario: Fetching details of Books 
+        When I fetch the details of books
+        Then I should validate

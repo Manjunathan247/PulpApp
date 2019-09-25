@@ -5,8 +5,8 @@ var sample = function () {
     var createSeriesPage = require('../pages/createSeriesPage.js');
     var createPublisherPage = require('../pages/createPublisherPage');
     var createBookPage = require('../pages/createBookPage.js');
-    var createMenu = require('../pages/createMenuPage');
     var listofSeriesPage = require('../pages/listOfSeriesPage.js');
+    var tableOfBooksPage = require('../pages/tableOfBooks.js');
 
     var { setDefaultTimeout } = require('cucumber');
     setDefaultTimeout(60 * 1000);
@@ -17,7 +17,7 @@ var sample = function () {
     defineSupportCode(function ({ Given, When, Then }) {
 
         Given('The Pulp app main menu is open', async function () {
-           
+
             var title = await browser.getTitle();
             console.log("Title of the page is " + title);
             await expect(title).to.equal("Pulp App Main Menu");
@@ -152,7 +152,6 @@ var sample = function () {
 
         Then('I enter the title of the book', async function () {
             await createBookPage.titleOfBook("demoBook");
-            await browser.sleep(10000);
         });
 
         Then('I select the Author from drop down', async function () {
@@ -183,7 +182,6 @@ var sample = function () {
 
         Then('I click on Create link to create Book', async function () {
             await createBookPage.createButton().click();
-            await browser.sleep(20000);
         });
 
         Then('the Book should be added to the list', async function () {
@@ -198,39 +196,70 @@ var sample = function () {
             var titleListOfSeriesPage = await browser.getTitle();
             console.log("Title of the page is " + titleListOfSeriesPage);
             await expect(titleListOfSeriesPage).to.equal("List of Series");
-            await browser.sleep(5000);
-
         });
 
         Then('It should display with list of created series', async function () {
-            var a = element(by.xpath("/html/body/ul/li/a"));
-            element.all(by.xpath("/html/body/ul/li")).each(function(a) {
-                // Will print 0 First, 1 Second, 2 Third.
-               a[1].getText().then(function (listOf_Series) {
-                  console.log("List of the series are "+ listOf_Series);
-                });
-              });
+            var pormises = [];
+            var seriesNameList = await listofSeriesPage.list;
+            console.log("There are " + seriesNameList.length + " series in the series list page");
+            // for (let j = 0; j < await b.length; j++) {
+
+            //     var seriesName = b[j].getText().then(function (textValue) {
+            //         console.log(textValue);
+            //     });
+
+            for (let j = 0; j < await seriesNameList.length; j++) {
+                var seriesName = await seriesNameList[j].getText();
+                console.log(seriesName);
+            }
         });
 
-        Then('I click on created series link', function () {
-
-
-        });
-
-        Then('It should display selected series details page', function () {
-
+        Then('I click on created series link', async function () {
+            await listofSeriesPage.selectList.click();
 
         });
 
-
-        Then('I click on List of Books in Series', function () {
-
-            ``
+        Then('It should display selected series details page', async function () {
+            var titleSeriesDetailPage = await browser.getTitle();
+            console.log("Title of the page is " + titleSeriesDetailPage);
+            await expect(titleSeriesDetailPage).to.equal("View Series");
         });
 
+        Then('I click on List of Books in Series', async function () {
+            await listofSeriesPage.listOfBooks.click();
 
-        Then('It should display the table of books in the series', function () {
+        });
 
+        Then('It should display the table of books in the series', async function () {
+            var tableOfBooksPage = await browser.getTitle();
+            console.log("Title of the page is " + tableOfBooksPage);
+            await expect(tableOfBooksPage).to.equal("Table of Books");
+
+        });
+
+        When('I fetch the details of books', async function () {
+            //Number of columns
+            var nameOfTableHeader = await tableOfBooksPage.tableHeader;
+            console.log("Number of columns in the table is " + nameOfTableHeader.length);
+
+            //Number of Rowa
+            var numberOfRows = await tableOfBooksPage.rowsOftable;
+            console.log("Number of rows in the table is " + numberOfRows.length);
+
+            var numberOfData = await tableOfBooksPage.numberOfData;
+            await console.log("table: "+numberOfData.length)
+            await tableOfBooksPage.rows(numberOfData);
+
+            
+
+            // for (let i = 1; i < numberOfRows.length; i++) {
+            //     var details = await element.all(by.xpath("/html/body/table/tbody/tr[2]/td[" + (i) + "]")).getText();
+            //     browser.sleep(20000);
+            //     await console.log(details);
+            // }
+        });
+
+        Then('I should validate', async function () {
 
         });
 
